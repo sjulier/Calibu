@@ -34,6 +34,8 @@
 #include <calibu/Platform.h>
 #include <calibu/cam/camera_crtp.h>
 #include <calibu/cam/camera_xml.h>
+#include <calibu/cam/camera_models_poly.h>
+#include <calibu/cam/camera_models_kb4.h>
 #include <calibu/calib/CostFunctionAndParams.h>
 
 #include <ceres/ceres.h>
