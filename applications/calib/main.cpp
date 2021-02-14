@@ -2,7 +2,7 @@
 #include <memory>
 
 #include <pangolin/pangolin.h>
-#include <pangolin/gldraw.h>
+#include <pangolin/gl/gldraw.h>
 
 #include <sophus/se3.hpp>
 
@@ -171,28 +171,32 @@ int main( int argc, char** argv)
 
       if(filename == "fov") {
         Eigen::Vector2i size_;
-        Eigen::VectorXd params_(FovCamera<double>::NumParams);
+	int numParams = FovCamera<double>::NumParams;
+        Eigen::VectorXd params_(numParams);
         size_ << w_i, h_i;
         params_ << 300, 300, w_i/2.0, h_i/2.0, 0.2;
         std::shared_ptr<CameraInterface<double>> starting_cam(new FovCamera<double>(params_, size_));
         input_cameras.push_back( CameraAndPose(starting_cam, Sophus::SE3d() ) );
       }else if(filename == "poly2") {
         Eigen::Vector2i size_;
-        Eigen::VectorXd params_(Poly2Camera<double>::NumParams);
+	int numParams = Poly2Camera<double>::NumParams;
+	Eigen::VectorXd params_(numParams);
         size_ << w_i, h_i;
         params_ << 300, 300, w_i/2.0, h_i/2.0, 0.0, 0.0, 0.0;
         std::shared_ptr<CameraInterface<double>> starting_cam(new Poly2Camera<double>(params_, size_));
         input_cameras.push_back( CameraAndPose(starting_cam, Sophus::SE3d() ) );
       }else if(filename == "poly3" || filename =="poly") {
         Eigen::Vector2i size_;
-        Eigen::VectorXd params_(Poly3Camera<double>::NumParams);
+	const int numParams = Poly3Camera<double>::NumParams;
+        Eigen::VectorXd params_(numParams);
         size_ << w_i, h_i;
         params_ << 300, 300, w_i/2.0, h_i/2.0, 0.0, 0.0, 0.0;
         std::shared_ptr<CameraInterface<double>> starting_cam(new Poly3Camera<double>(params_, size_));
         input_cameras.push_back( CameraAndPose(starting_cam, Sophus::SE3d() ) );
       }else if(filename == "kb4") {
         Eigen::Vector2i size_;
-        Eigen::VectorXd params_(KannalaBrandtCamera<double>::NumParams);
+	const int numParams = KannalaBrandtCamera<double>::NumParams;
+        Eigen::VectorXd params_(numParams);
         size_ << w_i, h_i;
         params_ << 300, 300, w_i/2.0, h_i/2.0, 0.0, 0.0, 0.0, 0.0;
         std::shared_ptr<CameraInterface<double>> starting_cam(new KannalaBrandtCamera<double>(params_, size_));
@@ -263,7 +267,8 @@ int main( int argc, char** argv)
     }else{
       // Generic starting set of parameters.
       Eigen::Vector2i size_;
-      Eigen::VectorXd params_(FovCamera<double>::NumParams);
+      const int numParams=FovCamera<double>::NumParams;
+      Eigen::VectorXd params_(numParams);
       size_ << w_i, h_i;
       params_ << 300, 300, w_i/2.0, h_i/2.0, 0.2;
       std::shared_ptr<FovCamera<double>>
@@ -545,7 +550,7 @@ int main( int argc, char** argv)
           // Draw current camera
           if(tracking_good[c]) {
             pangolin::glColorBin(c, 2, 0.5);
-            pangolin::glDrawFrustrum(Kinv,w_i,h_i,T_hw[c].inverse().matrix(),0.05);
+            pangolin::glDrawFrustum(Kinv,w_i,h_i,T_hw[c].inverse().matrix(),0.05);
           }
         }
       }
