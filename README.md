@@ -5,6 +5,16 @@ camera geometry and photometric model parameters. It may be used in conjunction
 with a calibration application e.g. vicalib (github.com/arpg/vicalib) and pcalib
 (github.com/aprg/pcalib) to calibrate cameras.
 
+SJJ NOTES
+---  
+Follow the Calibu instructions below. However, please use the most recent versions
+of Pangolin (https://github.com/stevenlovegrove/Pangolin) and Sophus
+(https://github.com/strasdat/Sophus).
+
+Example execution:
+
+./applications/calib/calibgrid convert:[fmt=GRAY8]//v4l:///dev/video0
+
 Installation
 ---
 To install calibu, please follow the installation instructions at:
