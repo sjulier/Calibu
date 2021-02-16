@@ -9,6 +9,7 @@
 #include <calibu/calib/Calibrator.h>
 #include <calibu/image/ImageProcessing.h>
 #include <calibu/target/TargetGridDot.h>
+#include <calibu/target/GridDefinitions.h>
 #include <calibu/target/RandomGrid.h>
 #include <calibu/gl/Drawing.h>
 #include <calibu/pose/Pnp.h>
@@ -238,7 +239,7 @@ int main( int argc, char** argv)
   conic_finder.Params().conic_min_density = 0.6;
   conic_finder.Params().conic_min_aspect = 0.2;
 
-  TargetGridDot target( grid_spacing, grid_size, grid_seed );
+  TargetGridDot target( grid_spacing, MediumGrid());//grid_size, grid_seed );
 
   double rad0 = 0.003; // cm
   double rad1 = 0.005; // cm
